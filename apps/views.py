@@ -34,6 +34,7 @@ import os
 import privateapi.core
 import privateapi.minidlna
 import privateapi.samba
+import privateapi.transmission
 
 class MinidlnaForm(forms.Form):
 	BOOLEAN_CHOICES = (
@@ -46,6 +47,13 @@ class MinidlnaForm(forms.Form):
 	#album_art_names = forms.CharField(max_length=300)
 	media_dir = forms.CharField()
 	port = forms.CharField()
+
+class TransmissionForm(forms.Form):
+  BOOLEAN_CHOICES = (
+      ('false', 'No'),
+      ('true', 'Yes'),
+    )
+  alt_speed_enabled = forms.ChoiceField(choices=BOOLEAN_CHOICES)
 
 
 @login_required
@@ -74,10 +82,16 @@ def minidlna(request):
 		config_dict = privateapi.minidlna.get_config()
 		form = MinidlnaForm(initial=config_dict)
 		return render_to_response('apps/minidlna.html', { "installed_apps": installed_apps, "form": form },context_instance=RequestContext(request))
+@login_required
+def transmission(request):
+  installed_apps = os.listdir("/etc/installed_apps/")
+  if request.method =='POST'
+    form = TransmissionForm(request.POST)
+    if form.is_valid():
+      dict = {}
+      dict['alt_speed_enabled'] = form.cleaned_data['alt_speed_enabled']
 
 @login_required
 def samba(request): 
     installed_apps = os.listdir("/etc/installed_apps/")
     return render_to_response('apps/samba.html', { "installed_apps": installed_apps },context_instance=RequestContext(request))
-
-
