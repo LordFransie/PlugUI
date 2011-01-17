@@ -1,5 +1,7 @@
 THIS CODE IS BETA QUALITY
 
+Note1: during development it is necessary for you to create a directory called '/etc/installed_apps', doesn't need anything in it
+
 To deploy for development just clone the git tree inside /opt/ , navigate to the directory and run "python2.7 manage.py runserver". This will be a single threaded server so it may be slow, but it will let you easily test the code and work on it.
 
 To deploy for use, clone the git tree into /opt/ then run "pacman -S python-distribute", then "easy_install-2.7 fapws3". Fapws is the python webserver being used to deploy the code, it is high performance and very light on resources.
