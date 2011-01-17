@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+
+{% block subnav %}
+<div id="subnav">
+<img src="/static/images/downright.png" id="downright"/>
+<div id="sidebar">
+<ul>
+<li><a href="/system/about">About Plug</a></li>
+<li><a href="/system/storage">Storage</a></li>
+<li><a href="/system/software">Software</a></li>
+<li><a href="/system/advanced">Advanced</a></li>
+<li><a href="/system/reboot">Reboot</a></li>
+</ul>
+</div><!-- sidebar -->
+</div><!-- subnav -->
+{% endblock %}
+
+{% block content %}
+
+<div class="page_body_section_with_sidebar">
+
+{% block configpage %}{% endblock %}
+
+</div><!-- page_body_section_with_sidebar -->
+{% endblock %}

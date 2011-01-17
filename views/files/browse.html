@@ -1,0 +1,32 @@
+{% extends "files/filestemplate.html" %}
+{% block title %}Files{% endblock %}
+
+{% block filespage %}
+<head>
+<link rel="stylesheet" type="text/css" href="/static/ext-2.3.0/resources/css/ext-all.css">
+<link rel="stylesheet" type="text/css" href="/static/filetree/css/icons.css">
+<link rel="stylesheet" type="text/css" href="/static/filetree/css/filetree.css">
+<link rel="stylesheet" type="text/css" href="/static/filetree/css/filetype.css">
+<link rel="stylesheet" type="text/css" href="/static/filetree/css/famflag.css">
+<link rel="stylesheet" type="text/css" href="/static/filetree/css/Ext.ux.IconCombo.css">
+<link rel="stylesheet" type="text/css" href="/static/filetree/css/empty.css" id="theme">
+<script type="text/javascript" src="/static/ext-2.3.0/adapter/ext/ext-base.js"></script>
+<script type="text/javascript" src="/static/ext-2.3.0/ext-all.js"></script>
+<script type="text/javascript" src="/static/filetree/js/Ext.ux.form.BrowseButton.js"></script>
+<script type="text/javascript" src="/static/filetree/js/Ext.ux.FileUploader.js"></script>
+<script type="text/javascript" src="/static/filetree/js/Ext.ux.UploadPanel.js"></script>
+<script type="text/javascript" src="/static/filetree/js/Ext.ux.FileTreeMenu.js"></script>
+<script type="text/javascript" src="/static/filetree/js/Ext.ux.FileTreePanel.js"></script>
+<script type="text/javascript" src="/static/filetree/js/Ext.ux.form.ThemeCombo.js"></script>
+<script type="text/javascript" src="/static/filetree/js/Ext.ux.form.IconCombo.js"></script>
+<script type="text/javascript" src="/static/filetree/js/Ext.ux.form.LangSelectCombo.js"></script>
+<script type="text/javascript" src="/static/filetree/filetree.js"></script>
+<script type="text/javascript" src="/static/filetree/locale/en_US.js"></script> 
+</head>
+<div id="filespage">
+<script type="text/javascript" src="/static/jqueryFileTree.js"></script>
+<h2>File Browser</h2>
+<div id="treepanel"></div>
+
+</div><!-- filespage -->
+{% endblock %}

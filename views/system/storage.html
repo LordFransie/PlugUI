@@ -1,0 +1,50 @@
+{% extends 'system/systemtemplate.html' %}
+
+{% block configpage %}
+<script type="text/javascript" src="/static/plugins/jqplot.pieRenderer.min.js"></script>
+<script type="text/javascript"><!--
+$.jqplot.config.enablePlugins = true;
+--></script>
+<div id="configpage">
+<h2>Storage</h2>
+{% for details in mounted_device_details %}
+<h4 class="storage-section">Mountpoint: {{ details.5 }}</h4>
+<span class="device-stats">
+<p>Device name: {{ details.0 }}</p>
+<p>Device size: <script type="text/javascript"><!-- 
+var aString = new String("{{ details.1 }}"); 
+var x = aString / 1024; 
+document.write(Math.round(x),"MB"); 
+--></script></p>
+<p>Space used: <script type="text/javascript"><!-- 
+var aString = new String("{{ details.2 }}"); 
+var x = aString / 1024; 
+document.write(Math.round(x),"MB"); 
+--></script></p>
+<p>Space free: <script type="text/javascript"><!-- 
+var aString = new String("{{ details.3 }}"); 
+var x = aString / 1024; 
+document.write(Math.round(x),"MB"); 
+--></script></p>
+<p>Filesystem: {{ details.7 }}</p>
+</span><!-- device-stats -->
+<div class="plot-area">
+
+<div class="jqPlot jqplot-target" id="{{ details.6 }}"></div>
+<script type="text/javascript"><!--
+var used = {{ details.2 }} / 1024;
+var free = {{ details.3 }} / 1024;
+line1 = [['used',used], ['free',free]];
+plot1 = $.jqplot('{{ details.6 }}', [line1], {
+    title: '',
+    seriesDefaults:{renderer:$.jqplot.PieRenderer},
+    legend:{show:true}
+});
+--></script>
+<br/><br/>
+
+</div><!-- plot-area -->
+<div id="clear"></div>
+{% endfor %}
+</div><!-- configpage -->
+{% endblock %}

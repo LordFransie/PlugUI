@@ -1,0 +1,19 @@
+<script type="text/javascript"><!--
+
+function runUpdates() {
+$.ajax({
+        method: 'GET',
+        cache: false,
+        url : '/api/doupdateos',
+        dataType : 'html',
+        success: function (html) { $('#updater').html(html); }
+});
+}
+
+runUpdates();
+
+--></script>
+
+<span class="page_body_section">
+<h2>Installing Updates</h2>
+<p><span id="updater"><img alt="updating" src="/init/static/images/bar.gif"/></span></p>

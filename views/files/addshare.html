@@ -1,0 +1,28 @@
+<html>
+<body>
+<h2>New shared file</h2>
+{{ debug }}
+<form action="/api/fileapi" method="post">
+
+	<input type="hidden" name="cmd" value="addshare">
+	
+	<label for="id_path">Path</label>
+	{{ form.path.errors }}
+	{{ form.path }}
+	
+	<br/><br/>
+	<label for="id_uuid">URL</label>
+	{{ form.uuid.errors }}
+	{{ form.uuid }}
+	
+	<br/><br/>
+
+	{{ form.public.errors }}
+	{{ form.public }}
+	<label for="id_public">Public share?</label>
+	<br/><br/>
+
+	<input type="submit" value="Save" onClick="">
+  </form>
+</body>
+</html>

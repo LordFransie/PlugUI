@@ -1,0 +1,65 @@
+{% extends 'system/systemtemplate.html' %}
+
+{% block configpage %}
+<script type="text/javascript"><!--
+function updateLoad() {
+$.ajax({
+        method: 'GET',
+        cache: 'false',
+        url : '/api/loadavg',
+        dataType : 'text',
+        success: function (text) { $('#load').text(text); }
+});
+}
+var loadInterval = setInterval(updateLoad, 5000);
+
+function updatePercentfree() {
+$.ajax({
+        method: 'GET',
+        cache: 'false',
+        url : '/api/memory_percent',
+        dataType : 'text',
+        success: function (text) { $('#percentfree').text(text); }
+});
+}
+var percentfreeInterval = setInterval(updatePercentfree, 60000);
+
+function updateMemfree() {
+$.ajax({
+        method: 'GET',
+        cache: 'false',
+        url : '/api/memory_free',
+        dataType : 'text',
+        success: function (text) { $('#memfree').text(text); }
+});
+}
+var memfreeInterval = setInterval(updateMemfree, 60000);
+
+function updateUptime() {
+$.ajax({
+        method: 'GET',
+        cache: 'false',
+        url : '/api/uptime',
+        dataType : 'text',
+        success: function (text) { $('#uptime').text(text); }
+});
+}
+var uptimeInterval = setInterval(updateUptime, 60000);
+--></script>
+
+<div id="configpage">
+<h4>Device Information</h4>
+<p>Device: {{ devicename }}</p>
+<p>Processor: {{ processor }}</p>
+<p>Architecture: {{ architecture }}</p>
+<h4>System Software</h4>
+<p>Base OS: Plugbox Linux</p>
+<p>Kernel Version: {{ kernelversion }}</p>
+<h4>Plug Status</h4>
+<p>Uptime: <span id="uptime">{{ currentuptime }}</span></p> 
+<p>Memory used: <meter min="0" max="100" value="{{ percentused }}"></meter> {{ memused }}MB</p>
+<p>Load: <span id="load">{{ load }}</span> (1min, 5min, 15min)</p>
+<p>Current IP: {{ currentip }}</p>
+</div><!-- configpage -->
+<div style="clear:both;"></div>
+{% endblock %}

@@ -1,0 +1,98 @@
+{% extends 'apps/apptemplate.html' %}
+{% block title %}MiniDLNA{% endblock %}
+
+{% block apppage %}
+<script type="text/javascript"><!--
+
+
+var package_name = "minidlna";
+
+function start() {
+$.ajax({
+        method: 'GET',
+        cache: false,
+        url : '/api/startapp/' + package_name,
+        dataType : 'text',
+        success: function (text) { 
+            setTimeout(checkStatus, 3000);
+        }
+});
+}
+
+function stop() {
+$.ajax({
+        method: 'GET',
+        cache: false,
+        url : '/api/stopapp/' + package_name,
+        dataType : 'text',
+        success: function (text) { 
+            setTimeout(checkStatus, 3000);
+        }
+});
+}
+
+function setLoader() {
+$('#runstatus').html('<img style="width:18px;height:18px;margin:0;" src="/static/images/loader.gif"/>');
+}
+
+function checkStatus() {
+setLoader();
+var startLink =  'Stopped - <a style="text-decoration:underline;" href="#" onclick="javascript:start();setLoader();">Click here to start</a>'
+var stopLink =  'Running - <a style="text-decoration:underline;" href="#" onclick="javascript:stop();setLoader();">Click here to stop</a>'
+$.ajax({
+        method: 'GET',
+        cache: false,
+        url : '/api/isrunning/' + package_name,
+        dataType : 'text',
+        success: function (text) { 
+            if (text == "False") {
+                $('#runstatus').html(startLink);
+            }
+            else {
+                $('#runstatus').html(stopLink);
+            }
+        }
+});
+}
+
+setTimeout(checkStatus, 3000);
+--></script>
+<div id="apppage">
+<h2>Minidlna</h2>
+
+<p>Daemon is: <span id="runstatus"><img style="width:18px;height:18px;margin:0;" src="/static/images/loader.gif"/></span></p>
+
+<h3>Configuration:</h3>
+<form action="" method="post">
+	
+	{{ form.strict_dlna.errors }}
+	{{ form.strict_dlna }}
+	<label for="id_strict_dlna">Strict DLNA</label>
+	<br/><br/>
+	{{ form.enable_tivo.errors }}
+	{{ form.enable_tivo }}
+	<label for="id_enable_tivo">Enable TiVO Support</label>
+	<br/><br/>
+	<label for="id_media_dir">Media Directory</label>
+	<br/>
+	{{ form.media_dir.errors }}
+	{{ form.media_dir }}
+	<br/><br/>
+	
+	<label for="id_port">Network port</label>
+	<br/>
+	{{ form.port.errors }}
+	{{ form.port }}
+	<br/><br/>
+	
+	<label for="id_inotify">Reload when files change</label>
+	<br/>
+	{{ form.inotify.errors }}
+	{{ form.inotify }}
+	<br/><br/>
+	
+	  {% csrf_token %}
+      <input type="submit" value="Save">
+  </form>
+</div><!-- apppage -->
+{% endblock %}

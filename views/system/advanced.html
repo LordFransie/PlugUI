@@ -1,0 +1,81 @@
+{% extends 'system/systemtemplate.html' %}
+
+{% block configpage %}
+<script type="text/javascript">
+
+function runMaintenance() {
+
+$.ajax({
+        method: 'GET',
+        cache: false,
+        url : '/api/maintenance',
+        dataType : 'json',
+        success: function (json) { 
+		
+			var returnvalues = json;
+			if (returnvalues.success) {
+				$('#loading').hide();
+				$('#button').show();
+				$('#maintenancestatus').html("Maintenance successful at " + returnvalues.last_maintenance ); 
+            }
+            else {
+				$('#loading').hide();
+				$('#button').show();
+                $('#maintenancestatus').html("Maintenance failed"); 
+            }
+			
+		}
+});
+}
+</script>
+<div id="configpage">
+<h2>Advanced</h2>
+<h3>System Maintenance</h3>
+<div id="maintenancestatus">Maintenance was last run at {{ last_maintenance }}</div>
+<br/>
+<div id="loading" style="display:none;"><img alt="checking" src="/static/images/bar.gif"/></div>
+<span id="button">
+<input type="button"
+       value="Run maintenance"
+       style="color: #333;
+       padding: 5px;
+       font-family: Georgia, ..., serif;
+       font-size: 18px;
+       letter-spacing: 2px;"
+       onclick="
+	   $('#button').hide();
+	   $('#loading').show();
+       $('#maintenancestatus').html('Maintenance running');
+       runMaintenance();
+		"/>
+</span>
+
+<h3>Settings</h3>
+<form action="" method="post">
+	
+	{{ form.green_trigger.errors }}
+	{{ form.green_trigger }}
+	<label for="id_green_trigger">Green LED Trigger</label>
+	<br/><br/>
+	{{ form.orange_trigger.errors }}
+	{{ form.orange_trigger }}
+	<label for="id_orange_trigger">Orange LED Trigger</label>
+	<br/><br/>
+
+	{{ form.sdautomount.errors }}
+	{{ form.sdautomount }}
+	<label for="id_sd_automount">Automount SD cards</label>
+	<br/><br/>
+	
+	{{ form.usbautomount.errors }}
+	{{ form.usbautomount }}
+	<label for="id_usb_automount">Automount USB and other storage devices</label>
+	<br/><br/>
+		
+	{% csrf_token %}
+      <input type="submit" value="Save">
+  </form>
+
+
+</div><!-- configpage -->
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "users/userstemplate.html" %}
+{% block title %}Users{% endblock %}
+{% block userpage %}
+<div id="userpage">
+<h2>Users</h2>
+<table id="userlist">
+<thead>
+<tr>
+<th>Name</th>
+<th>Email</th>
+<th>Group</th>
+<th>Active</th>
+<th>Upload</th>
+<th>Download</th>
+<th></th>
+</tr>
+</thead>
+{% for user in user_list %}
+<tr class="{% cycle 'odd' 'even' %}">
+<td>{{ user.username }}</td>
+<td>{{ user.email }}</td>
+<td>{{ user.group }}</td>
+<td>{{ user.is_active }}</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>
+<form action="/users/delete" method="post">
+	  {% csrf_token %}
+	  <input type="hidden" name="name" value="{{ user.username }}"/>
+      <input type="submit" value="Delete">
+</form>
+</td>
+</tr>
+{% endfor %}
+</table><!-- userlist -->
+</div><!-- userpage -->
+<div style="clear:both;"></div>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'system/systemtemplate.html' %}
+
+{% block configpage %}
+<div id="configpage">
+<div id="buttonarea">
+<p>Reboot?</p>
+<span class="button">
+<input type="button"
+       value="Reboot"
+       style="color: #333;
+       padding: 5px;
+       font-family: Georgia, ..., serif;
+       font-size: 18px;
+       letter-spacing: 2px;"
+       onclick="ajaxSwap('#buttonarea');$('#pagetitle').html('Please Wait');rebootAndRedirect();"/>
+</span>
+
+<span class="button">
+<input type="button"
+       value="Cancel"
+       style="color: #333;
+       padding: 5px;
+       font-family: Georgia, ..., serif;
+       font-size: 18px;
+       letter-spacing: 2px;"
+       onClick="location.href='/';"/>
+</span>
+</div><!-- buttonarea -->
+</div><!-- configpage -->
+{% endblock %}

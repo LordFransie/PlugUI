@@ -1,0 +1,22 @@
+{% extends 'layout.html' %}
+
+{% block subnav %}
+<div id="subnav">
+<img src="/static/images/downright.png" id="downright"/>
+<div id="sidebar">
+<ul>
+<li><a href="/files/browse">Browse</a></li>
+<li><a href="/files/shares">Shares</a></li>
+</ul>
+</div><!-- sidebar -->
+</div><!-- subnav -->
+{% endblock %}
+
+{% block content %}
+
+<div class="page_body_section_with_sidebar">
+
+{% block filespage %}{% endblock %}
+
+</div><!-- page_body_section_with_sidebar -->
+{% endblock %}

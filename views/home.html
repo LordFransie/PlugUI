@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block title %}Plugbox Linux{% endblock %}
+{% block content %}
+
+<div class="page_body_section">
+
+<h2>Welcome to Plugbox Linux</h2>
+{% if updatesavailable %}
+<p>There are {{ updatecount }} updates available</p>
+{% else %}
+<p>There are no updates available</p>
+{% endif %}
+
+<div id="newsbox">
+<ul id="newslist">
+{% for entry in news_list %}
+<li id="newsentry">
+<div id="newstitle"><a href="{{ entry.link }}" target=”_blank”>{{ entry.title }}</a></div><!-- newstitle -->
+<span id="newsdescription">{{ entry.description }}</span><!-- newsdescription -->
+<span id="readmore"><a href="{{ entry.link }}" target=”_blank”>Read More</a><span><!-- readmore -->
+</li><!-- newsentry -->
+{% endfor %}
+</ul><!-- newslist -->
+</div>
+</div><!-- page_body_section -->
+{% endblock %}

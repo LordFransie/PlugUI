@@ -1,0 +1,35 @@
+{% extends "files/filestemplate.html" %}
+{% block title %}File Sharing{% endblock %}
+
+{% block filespage %}
+<div id="filespage">
+<h2>File Sharing</h2>
+<p>The following files and directories are currently shared:</p>
+
+
+<table id="sharelist">
+<thead>
+<tr>
+<th>Name</th>
+<th>URL</th>
+<th></th>
+</tr>
+</thead>
+{% for share in sharelist %}
+<tr class="{% cycle 'odd' 'even' %}">
+<td>{{ share.filename }}</td>
+<td><a href="http://{{ hostname }}/files/download/{{ share.uuid }}">http://{{hostname}}/files/download/{{ share.uuid }}</a></td>
+<td>
+<form action="/files/deleteshare" method="post">
+	  {% csrf_token %}
+	  <input type="hidden" name="uuid" value="{{ share.uuid }}"/>
+      <input type="submit" value="Delete">
+</form>
+</td>
+</tr>
+{% endfor %}
+</table><!-- sharelist -->
+
+
+</div><!-- filespage -->
+{% endblock %}

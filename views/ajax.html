@@ -1,0 +1,49 @@
+<script tyle="text/javascript"><!--//
+
+function ajaxSwap(id) {
+$(id).html('<img alt="Please Wait" src="/static/images/bar.gif"/>');
+}
+
+function rebootAndRedirect() {
+$.ajax({
+        'type': "GET",
+        'url': '/api/rebootnow',
+        'cache': false,
+});
+setTimeout("go_home()",30000);
+}
+
+function go_home () {
+    window.location.href = "/";
+}
+
+function loadConfig(name) {
+$('#configpage').load('/system/' + name);
+}
+
+function loadApp(name) {
+$('#apppage').load('/apps/package/?name=' + name);
+}
+
+function currentdate() {
+var mydate = new Date();
+var year = mydate.getYear();
+
+if (year < 1000) {
+      year += 1900;
+}
+
+var day = mydate.getDay();
+var month = mydate.getMonth();
+var daym = mydate.getDate();
+
+if (daym<10) {
+      daym = "0" + daym;
+}
+
+var dayarray = new Array("Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday");
+var montharray=new Array("January","February","March","April","May","June","July","August","September","October","November","December");
+document.write(dayarray[day]+", "+montharray[month]+" "+daym+", "+year);
+}
+
+//--></script>

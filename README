@@ -1,0 +1,9 @@
+Yea, stuff is broken this is an inital port from the web2py version to django
+
+To deploy for development just clone the git tree, navigate to the directory and run "python2.7 manage.py runserver".
+
+To deploy for use, clone the git tree so that the files are in /opt/webui/ (be careful to not have /opt/webui/plugapps-webui when cloning) then run "pacman -S python-distribute", then "easy_install-2.7 fapws3". 
+
+Then to run the server, change to the webui directory and run "./webui start". 
+
+If you want the webui to start at boot, run "ln -s /opt/webui/webui /etc/rc.d/webui", then add "webui" to the daemon section of /etc/rc.conf

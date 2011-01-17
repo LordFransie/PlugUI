@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html style="margin:0;padding:0;" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+  <head>
+    <title>{% block title %}Plugbox Linux{% endblock %}</title>
+    <link rel="shortcut icon"
+          href="/static/favicon.gif"
+          type="image/vnd.microsoft.icon">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="/static/style.css" rel="stylesheet" type="text/css" />
+    <script language="javascript" type="text/javascript" src="/static/jquery-1.4.4.min.js"></script>
+    <script language="javascript" type="text/javascript" src="/static/jquery.jqplot.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/jquery.jqplot.css" />
+    <link rel="stylesheet" type="text/css" href="/static/jqueryFileTree.css" />
+	{% include "ajax.html" %}
+  </head>
+
+<body style="margin:0;padding:0;">
+<div id="main">
+<div id="inner-wrapper">
+<div id="logobar">
+</div><!-- logobar -->
+<div id="headerbar">
+<div id="nav">
+<ul>
+{% load active %}
+{% url home as home %}
+{% url files as files %}
+{% url apps as apps %}
+{% url system as system %}
+{% url users as users %}
+<li class="{% active request home %}"><a href="/home">Home</a></li>
+<li class="{% active request files %}"><a href="/files">Files</a></li>
+<li class="{% active request apps %}"><a href="/apps">Apps</a></li>
+<li class="{% active request system %}"><a href="/system">System</a></li>
+<li class="{% active request users %}"><a href="/users">Users</a></li>
+</ul>
+<span id="login">
+{% if request.user.is_authenticated %}
+    Welcome {{ request.user.username|capfirst }} - <a href="/users/logout">Logout</a>
+{% else %}
+    <a href="/users/login">Login</a>
+{% endif %}
+</span><!-- login -->
+</div><!-- nav -->
+
+{% block subnav %}{% endblock %}
+
+</div><!-- headerbar -->
+<div id="content">
+<div id="page_body">
+{% block content %}{% endblock %}
+</div><!-- page_body -->
+</div><!-- content -->
+</div><!-- inner-wrapper -->
+<div class="push"></div>
+</div><!--main -->
+
+<div  id="footer">
+	<div id="footer-inner">
+		<div id="logo">
+			<a class="home" href="/" title="Home">
+			<img src="/static/images/tuxinbox-50px.png" alt="PlugApps" />
+			</a>
+		</div>
+    
+		<ul id="link-list">
+			<li><a href="/">Home</a></li>
+			<li><a href="http://dev.plugapps.com/plugbox-linux/">Plugbox Linux</a></li>
+			<li><a href="http://dev.plugapps.com/category/news/">News</a></li>
+			<li><a href="http://dev.plugapps.com/forum/">Forum</a></li>
+			<li><a href="http://dev.plugapps.com/wiki/">Wiki</a></li>
+			<li><a href="http://dev.plugapps.com/plugui-api">PlugUI API</a></li>
+			<li><a href="http://dev.plugapps.com/credits">Credits</a></li>
+			<li><a href="http://dev.plugapps.com/legal">Legal</a></li>         
+		</ul>   
+		<span id="copyright">Copyright © 2011 PlugApps. Linux is the registered trademark of Linus Torvalds in the U.S. and other countries. Plugbox Linux is released under the GPL.</span>
+		<div id="clear"></div>
+	</div>
+</div>
+
+</body> 
+
+
+</html>
