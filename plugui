@@ -14,7 +14,7 @@ sys.path.append('/opt')
 os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
 
 
-class WebUIDaemon(Daemon):
+class PlugUIDaemon(Daemon):
 	def run(self):
 		start()
 		while True:
@@ -29,7 +29,7 @@ def start():
 		res=django_handler.handler(environ, start_response)
 		return [res]
     
-	static=views.Staticfile('/opt/webui/static/', maxage=2629000)
+	static=views.Staticfile('/opt/PlugUI/static/', maxage=2629000)
 	evwsgi.wsgi_cb(("/static/",static))    
 	evwsgi.wsgi_cb(('',generic))
     
@@ -37,7 +37,7 @@ def start():
 	evwsgi.run()
 
 if __name__=="__main__":
-	daemon = WebUIDaemon('/opt/webui/webui.pid')
+	daemon = PlugUIDaemon('/opt/PlugUI/plugui.pid')
 	if len(sys.argv) == 2:
 		if 'start' == sys.argv[1]:
 			daemon.start()
@@ -52,6 +52,3 @@ if __name__=="__main__":
 	else:
 		print "usage: %s start|stop|restart" % sys.argv[0]
 		sys.exit(2)
-
-
-

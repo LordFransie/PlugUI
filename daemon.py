@@ -78,10 +78,10 @@ class Daemon:
 		except ValueError:
 			pid = None
 	
-		process = os.popen("ps x -o pid,args | grep -v grep | grep -v start | grep webui").read()
-		if "webui" in process:
+		process = os.popen("ps x -o pid,args | grep -v grep | grep -v start | grep plugui").read()
+		if "plugui" in process:
 			print process
-			message = "WebUI is already running!\n"
+			message = "PlugUI is already running!\n"
 			sys.stderr.write(message)
 			sys.exit(1)
 		else:
