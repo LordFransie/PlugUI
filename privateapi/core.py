@@ -68,6 +68,13 @@ def getcurrentip():
        currentip_tuple = s.getsockname()
        return currentip_tuple[0]
 
+def getethermac():
+    cmd = """ifconfig -a | grep eth0 | awk '{ print $5 }'"""
+    process = subprocess.Popen(cmd,stdout=subprocess.PIPE,shell=True)
+    ethermac = process.stdout.read()
+    return ethermac.rstrip('\n')
+	
+
 def getkernelversion():
        kernv_cmd = "uname -rv"
        args = shlex.split(kernv_cmd)
