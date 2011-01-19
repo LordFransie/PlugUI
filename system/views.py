@@ -67,6 +67,11 @@ def reboot(request):
 
 @login_required
 def advanced(request):
+	try:
+		maintenance_stats = MaintenanceStats.objects.get(id=1)
+		last_maintenance = maintenance_stats.last_maintenance
+	except:
+		last_maintenance = 'some point in the near future'
 	if request.method == 'POST':
 		form = AdvancedForm(request.POST)
 		if form.is_valid():
@@ -96,11 +101,6 @@ def advanced(request):
 			
 		form_dict = dict(led_dict.items() + automount_dict.items())
 		form = AdvancedForm(initial=form_dict)
-		try:
-			maintenance_stats = MaintenanceStats.objects.get(id=1)
-			last_maintenance = maintenance_stats.last_maintenance
-		except:
-			last_maintenance = 'some point in the near future'
 		
 	return render_to_response('system/advanced.html', { "form": form, "last_maintenance": last_maintenance }, context_instance=RequestContext(request))
 	
