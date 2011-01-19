@@ -18,7 +18,7 @@
 {% for share in sharelist %}
 <tr class="{% cycle 'odd' 'even' %}">
 <td>{{ share.filename }}</td>
-<td><a href="http://{{ hostname }}/files/download/{{ share.uuid }}">http://{{hostname}}/files/download/{{ share.uuid }}</a></td>
+<td><a href="http://plugfinder.appspot.com/dl/{{ mac }}/{{ share.uuid }}">http://plugfinder.appspot.com/dl/{{ mac }}/{{ share.uuid }}</a></td>
 <td>
 <form action="/files/deleteshare" method="post">
 	  {% csrf_token %}

@@ -59,7 +59,9 @@ def shares(request):
 	for share in sharelist:
 		share.filename = os.path.basename(share.path)
 	hostname = privateapi.core.gethostname()
-	return render_to_response('files/shares.html', { "sharelist": sharelist, "hostname": hostname }, context_instance=RequestContext(request))
+	mac = base64.b64encode(str(privateapi.core.getethermac()))[:10]
+	currentip = privateapi.core.getcurrentip()
+	return render_to_response('files/shares.html', { "sharelist": sharelist, "hostname": hostname, "mac": mac, "currentip": currentip }, context_instance=RequestContext(request))
 
 @condition(etag_func=None)
 def downloadshare(request,shareuuid=''):

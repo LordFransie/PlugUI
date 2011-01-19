@@ -1,7 +1,7 @@
 #!/usr/bin/env python 
 # coding: utf8
 
-import shlex, subprocess, re, socket, os, httplib, urllib
+import shlex, subprocess, re, socket, os, httplib, urllib, base64
 import feedparser
 from home.models import PlugappsNewsEntry
 from system.models import MaintenanceStats
@@ -22,7 +22,7 @@ def update_plugapps_news():
 		item.save()
 
 def update_plug_location():
-	currentmac = privateapi.core.getethermac()
+	currentmac = base64.b64encode(str(privateapi.core.getethermac()))[:10]
 	currentip = privateapi.core.getcurrentip()
 	params = urllib.urlencode( { 'plugid': currentmac, 'localip': currentip } )
 	headers = {"Content-type": "application/x-www-form-urlencoded", "Accept": "text/plain"}
