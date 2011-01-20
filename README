@@ -9,20 +9,18 @@ Note1: during development it is necessary for you to create a few directories fi
 	these are needed to store files that change and can't be kept with the main PlugUI code.
 
 
-Deployment for development or use:
+To use for development:
 
 Step 1: clone the git tree: "cd /opt; git clone git://github.com/plugapps/PlugUI.git " 
 
 	(if you wish to help with development, fork the tree on github instead and clone your own tree so you can commit and we can pull from you)
 
-Step 2: install python and the cherrypy code: "pacman -S python2 cherrypy"
-
-	PlugUI is written with the Django framework, but we are using the cherrpy webserver because it is fast, light and supports large file downloads
+Step 2: install python: "pacman -S python2"
 
 Step 3: synchronize the database 'cd /opt/PlugUI/; python2 manage.py syncdb'
 
 	create a user when asked, this is the super user who has access to the web interface by default. you can create other users later from the interface. 
 
-Step 4: run the server: 'cd /opt/PlugUI; python2 manage.py runcpserver'
+Step 4: run the server: 'cd /opt/PlugUI; python2 manage.py runserver 0.0.0.0:80'
 
 Step 5: type your plugs IP address in a web browser, enter the username you created earlier when asked.
