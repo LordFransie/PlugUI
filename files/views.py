@@ -14,41 +14,6 @@ import privateapi.core
 
 import uuid, urllib, base64, sys, traceback, mimetypes, os
 
-class PlugStorage(Storage):
-	def __init__(self, option=None):
-		if not option:
-			option = settings.CUSTOM_STORAGE_OPTIONS
-			
-	def delete():
-		pass
-		
-	def exists():
-		pass
-		
-	def listdir():
-		pass
-	
-	def size():
-		pass
-		
-	def url():
-		pass
-		
-class FileIterWrapper(object):
-	def __init__(self, flo, chunk_size = 1024**2):
-		self.flo = flo
-		self.chunk_size = chunk_size
-
-	def next(self):
-		data = self.flo.read(self.chunk_size)
-		if data:
-			return data
-		else:
-			raise StopIteration
-
-	def __iter__(self):
-		return self
-
 @login_required	
 def browse(request):
     return render_to_response('files/browse.html', {}, context_instance=RequestContext(request))
@@ -64,15 +29,11 @@ def shares(request):
 	return render_to_response('files/shares.html', { "sharelist": sharelist, "hostname": hostname, "mac": mac, "currentip": currentip }, context_instance=RequestContext(request))
 
 @condition(etag_func=None)
+@csrf_exempt
 def downloadshare(request,shareuuid=''):
 	share = Share.objects.get(uuid=shareuuid)
 	path = share.path
-	mimetype = mimetypes.guess_type(path)
-	response = HttpResponse(FileIterWrapper(open(path)), mimetype='%s' % mimetype[0])
-	response['Content-Length'] = os.path.getsize(path)
-	response['Content-Disposition'] = 'attachment; filename=%s' % os.path.basename(path)
-	return response
-	
+	return HttpResponse()
 	
 @login_required
 @csrf_exempt

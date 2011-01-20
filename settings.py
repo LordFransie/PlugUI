@@ -42,7 +42,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
 )
 
-ROOT_URLCONF = 'PlugUI.urls'
+ROOT_URLCONF = 'urls'
 
 TEMPLATE_DIRS = (
     '/opt/PlugUI/views'
@@ -63,11 +63,11 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.messages',
-    'PlugUI.users',
-    'PlugUI.privateapi',
-    'PlugUI.system',
-    'PlugUI.files',
-    'PlugUI.apps',
-    'PlugUI.home',
-    'PlugUI.cpserver',
+    'users',
+    'privateapi',
+    'system',
+    'files',
+    'apps',
+    'home',
+    'cpserver',
 )
