@@ -65,31 +65,34 @@ setTimeout(checkStatus, 3000);
 <h3>Configuration:</h3>
 <form action="" method="post">
 	
-	{{ form.strict_dlna.errors }}
+	
 	{{ form.strict_dlna }}
-	<label for="id_strict_dlna">Strict DLNA</label>
+	<label for="id_strict_dlna">Strict DLNA</label>{{ form.strict_dlna.errors }}
 	<br/><br/>
-	{{ form.enable_tivo.errors }}
+	
+	
 	{{ form.enable_tivo }}
-	<label for="id_enable_tivo">Enable TiVO Support</label>
+	<label for="id_enable_tivo">Enable TiVO Support</label>{{ form.enable_tivo.errors }}
 	<br/><br/>
-	<label for="id_media_dir">Media Directory</label>
+	
+	
+	{{ form.inotify }}
+	<label for="id_inotify">Reload when files change</label>{{ form.inotify.errors }}
+	<br/><br/>
+	
+	<label for="id_media_dir">Media Directory</label>{{ form.media_dir.errors }}
 	<br/>
-	{{ form.media_dir.errors }}
+	
 	{{ form.media_dir }}
 	<br/><br/>
 	
-	<label for="id_port">Network port</label>
+	<label for="id_port">Network port</label>{{ form.port.errors }}
 	<br/>
-	{{ form.port.errors }}
+	
 	{{ form.port }}
 	<br/><br/>
 	
-	<label for="id_inotify">Reload when files change</label>
-	<br/>
-	{{ form.inotify.errors }}
-	{{ form.inotify }}
-	<br/><br/>
+
 	
 	  {% csrf_token %}
       <input type="submit" value="Save">

@@ -54,56 +54,40 @@ def get_config(file="/etc/minidlna.conf", delim='='):
 				if kvp[1].strip().split('#') is not None:
 					d[kvp[0].strip()] = kvp[1].split('#')[0].strip()
 				else:
-					d[kvp[0].strip()] = kvp[1].strip()
-		if d['strict_dlna'] == 'no':
-			d['strict_dlna'] = False
-		else:
-			d['strict_dlna'] = True
-		if d['enable_tivo'] == 'no':
-			d['enable_tivo'] = False
-		else:
-			d['enable_tivo'] = True		
-	
+					d[kvp[0].strip()] = kvp[1].strip()	
 		return d
 	except:
 		return {}
 		
 def set_config(configdict):
-    #cf = open("/etc/minidlna.conf", "r")
-    #lns = cf.readlines()
-    # close it so that we can open for writing later
-    #cf.close()
-
-    # assumes LASTKNOWN and CURRENT are strings with dotted notation IP addresses
-    #lns = "".join(lns)
-    #lns = re.sub(LASTKNOWN, CURRENT, lns)  # This replaces all occurences of LASTKNOWN with CURRENT
-
-    #cf = open("/etc/minidlna.conf", "w")
-    #cf.write(lns)
-    #cf.close()
 	port_line = "port=" + configdict['port']
 	media_dir_line = "media_dir=" + configdict['media_dir']
 	inotify_line = "inotify=" + configdict['inotify']
 	tivo_line = "enable_tivo=" + configdict['enable_tivo']
 	dlna_line = "strict_dlna=" + configdict['strict_dlna']
 	oldfile = open('/etc/minidlna.conf','r')
-	newfile = open('/etc/~minidlna.conf','a')
+	newfile = open('/etc/minidlna.conf.new','w')
 	for line in oldfile:
-		if "port=" in line:
-			line = port_line
+		if "#" in line:
+			line = line
+			newfile.write(line)
+			continue
+		elif "port=" in line:
+			line = port_line + '\n'
 		elif "media_dir=" in line:
-			line = media_dir_line
+			line = media_dir_line + '\n'
 		elif "inotify=" in line:
-			line = inotify_line
+			line = inotify_line + '\n'
 		elif "enable_tivo=" in line:
-			line = tivo_line
+			line = tivo_line + '\n'
 		elif "strict_dlna=" in line:
-			line = dlna_line
+			line = dlna_line + '\n'
 		else:
 			line = line
 		newfile.write(line)
 	newfile.close()
 	oldfile.close()
+	os.rename('/etc/minidlna.conf.new','/etc/minidlna.conf')
 	return True
 		
 	
