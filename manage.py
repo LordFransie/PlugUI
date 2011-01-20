@@ -1,5 +1,9 @@
 #!/usr/bin/env python2
 from django.core.management import execute_manager
+import sys
+sys.path.append("/opt/PlugUI")
+
+
 try:
     import settings # Assumed to be in the same directory.
 except ImportError:
