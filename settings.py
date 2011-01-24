@@ -94,4 +94,5 @@ INSTALLED_APPS = (
     'files',
     'apps',
     'home',
+    'cpserver',
 )
